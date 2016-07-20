@@ -4,7 +4,7 @@ const yargs = require('yargs');
 
 const config = {
 	depPaths: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
-	folderPrefixes: ['dojo-cli-command'],
+	folderPrefixes: ['dojo-cli-build'],
 }
 
 const pluginMap = new Map();
@@ -20,7 +20,7 @@ function globs (depPaths, folderPrefixes) {
 }
 
 globby(globs(config.depPaths, config.folderPrefixes)).then((paths) => {
-	paths.map((path) => {
+	const commands = paths.map((path) => {
 		const command = require(path);
 		const pluginName = command.name || /dojo-cli-.*-(.*)/.exec(path)[1];
 		let computedName = pluginName
@@ -30,12 +30,14 @@ globby(globs(config.depPaths, config.folderPrefixes)).then((paths) => {
 			count++;
 		}
 		pluginMap.set(computedName, command);
-		yargs.command(
-			computedName,
-			command.description,
-			command.register,
-			command.run
-		);
+		return [computedName, command.description, command.register, command.run];
 	});
-	yargs.help().argv
+	yargs.command("build", "top level command", function(yargs) {
+		commands.map((command) => yargs.command.apply(null, command));
+		return yargs;
+	})
+	.demand(1, "must provide a valid command")
+	.help("h")
+	.alias("h", "help")
+	.argv
 });
