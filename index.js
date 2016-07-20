@@ -5,7 +5,10 @@ const yargs = require('yargs');
 const config = {
 	depPaths: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
 	folderPrefixes: ['dojo-cli-build'],
-	commandTypes: ['build', 'template']
+	commandTypes: [
+		{ name: 'build', description: 'build all the things' },
+		{ name: 'template', description: 'get started quickly with a template' }
+	]
 }
 
 const pluginMap = new Map();
@@ -47,9 +50,9 @@ globby(globs(config.depPaths, config.folderPrefixes)).then((paths) => {
 	});
 
 	config.commandTypes.forEach((commandType) => {
-		yargs.command(commandType, '', (yargs) => {
+		yargs.command(commandType.name, commandType.description, (yargs) => {
 			commands
-				.filter((command) => command.type === commandType)
+				.filter((command) => command.type === commandType.name)
 				.map((command) => yargs.command.apply(null, command.args));
 			return yargs;
 		});
