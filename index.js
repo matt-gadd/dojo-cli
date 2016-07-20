@@ -37,6 +37,5 @@ globby(globs(config.depPaths, config.folderPrefixes)).then((paths) => {
 			command.run
 		);
 	});
-	yargs.help()
-		.argv
+	yargs.help().argv
 });
