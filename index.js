@@ -4,7 +4,7 @@ const yargs = require('yargs');
 
 const config = {
 	depPaths: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
-	folderPrefixes: ['dojo-cli-command', 'dojo-cli-template'],
+	folderPrefixes: ['dojo-cli-command'],
 }
 
 const pluginMap = new Map();
