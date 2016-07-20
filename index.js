@@ -3,7 +3,7 @@ const path = require('path');
 const yargs = require('yargs');
 
 const config = {
-	depPaths: ['node_modules'],
+	depPaths: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
 	folderPrefixes: ['dojo-cli-command', 'dojo-cli-template'],
 }
 
