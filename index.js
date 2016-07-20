@@ -30,9 +30,9 @@ globby(globs(config.depPaths, config.folderPrefixes)).then((paths) => {
 			count++;
 		}
 		pluginMap.set(computedName, command);
-		return [computedName, command.description, command.register, command.run];
+		return [computedName, `${command.description} (${path})`, command.register, command.run];
 	});
-	yargs.command("build", "top level command", function(yargs) {
+	yargs.command("build", "production-ize your app", function(yargs) {
 		commands.map((command) => yargs.command.apply(null, command));
 		return yargs;
 	})
