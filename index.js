@@ -32,12 +32,12 @@ globby(globs(config.depPaths, config.folderPrefixes)).then((paths) => {
 		pluginMap.set(computedName, command);
 		return [computedName, `${command.description} (${path})`, command.register, command.run];
 	});
-	yargs.command("build", "production-ize your app", function(yargs) {
+	yargs.command('build', 'production-ize your app', function(yargs) {
 		commands.map((command) => yargs.command.apply(null, command));
 		return yargs;
 	})
-	.demand(1, "must provide a valid command")
-	.help("h")
-	.alias("h", "help")
+	.demand(1, 'must provide a valid command')
+	.help('h')
+	.alias('h', 'help')
 	.argv
 });
