@@ -1,12 +1,12 @@
 const path = require('path');
 
 module.exports = {
-	depPaths: [
+	searchPaths: [
 		path.resolve(__dirname, 'node_modules'),
 		path.resolve(__dirname, '../'),
 		'node_modules'
 	],
-	folderPrefixes: ['dojo-cli'],
+	searchPrefixes: ['dojo-cli'],
 	commandTypes: [
 		{ name: 'new', description: 'scaffold' },
 		{ name: 'build', description: 'build all the things' },

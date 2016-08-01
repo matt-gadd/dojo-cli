@@ -9,10 +9,10 @@ updateNotifier({pkg}).notify();
 
 const pluginMap = new Map();
 
-function globs(depPaths, folderPrefixes, commandTypes) {
+function globs(searchPaths, searchPrefixes, commandTypes) {
 	const globPaths = [];
-	depPaths.forEach((depPath) => {
-		folderPrefixes.forEach((folderPrefix) => {
+	searchPaths.forEach((depPath) => {
+		searchPrefixes.forEach((folderPrefix) => {
 			commandTypes.forEach((commandType) => {
 				globPaths.push(path.resolve(depPath, `${folderPrefix}-${commandType.name}-*`));
 			});
@@ -21,7 +21,7 @@ function globs(depPaths, folderPrefixes, commandTypes) {
 	return globPaths;
 }
 
-globby(globs(config.depPaths, config.folderPrefixes, config.commandTypes)).then((paths) => {
+globby(globs(config.searchPaths, config.searchPrefixes, config.commandTypes)).then((paths) => {
 	const commands = paths.map((path) => {
 		const command = require(path);
 		const pluginParts = /dojo-cli-(.*)-(.*)/.exec(path);
