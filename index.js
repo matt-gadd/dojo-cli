@@ -5,7 +5,8 @@ const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
 const config = require('./config');
 
-updateNotifier({pkg}).notify();
+const notifier = updateNotifier({ pkg, updateCheckInterval: 0 });
+notifier.notify();
 
 const pluginMap = new Map();
 
