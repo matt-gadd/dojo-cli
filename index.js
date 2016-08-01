@@ -3,18 +3,9 @@ const path = require('path');
 const yargs = require('yargs');
 const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
+const config = require('./config');
 
 updateNotifier({pkg}).notify();
-
-const config = {
-	depPaths: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, '../'), 'node_modules'],
-	folderPrefixes: ['dojo-cli'],
-	commandTypes: [
-		{ name: 'new', description: 'scaffold' },
-		{ name: 'build', description: 'build all the things' },
-		{ name: 'template', description: 'get started quickly with a template' }
-	]
-};
 
 const pluginMap = new Map();
 
