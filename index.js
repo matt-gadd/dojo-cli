@@ -1,9 +1,13 @@
 const globby = require('globby');
 const path = require('path');
 const yargs = require('yargs');
+const updateNotifier = require('update-notifier');
+const pkg = require('./package.json');
+
+updateNotifier({pkg}).notify();
 
 const config = {
-	depPaths: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
+	depPaths: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, '../'), 'node_modules'],
 	folderPrefixes: ['dojo-cli'],
 	commandTypes: [
 		{ name: 'new', description: 'scaffold' },

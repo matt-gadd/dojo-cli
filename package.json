@@ -6,11 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin" : { "dojo" : "./bin/dojo" },
+  "bin": {
+    "dojo": "./bin/dojo"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "globby": "^5.0.0",
+    "update-notifier": "^1.0.2",
     "yargs": "^4.8.1"
   }
 }
